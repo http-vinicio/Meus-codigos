@@ -1,16 +1,5 @@
 # Sistema-de-adivinhar-o-numeros
-from random import randint
-
-
-
-
-
-
-
-
-
-
-
+from random import rand
 print('Adivinhe o numero de 1 a 3 ou morra')
 vida = 5
 rodada = 1
