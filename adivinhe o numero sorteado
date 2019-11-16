@@ -1,29 +1,25 @@
 from random import randint
-print('Adivinhe o numero de 1 a 3 ou morra')
-vida = 5
-rodada = 1
-while vida > 0:
-    sorteio = randint(1, 3)
-    print(40*'-')
-    print(f'Rodada: {rodada}\nVida: {vida}')
-    sugestao = int(input('Sugestão, sua vida depende disso: '))
-    print(40*'-')
-    if sugestao > 3:
-        print('Ta querendo da uma de espertinho? pois perderá duas vidas pela gracinha')
-        vida -= 1
-    if sugestao == 0:
-        print('você tentou burlar o sistema usando "0" e pegará com a vida por isso')
-        break
-    if sugestao == sorteio:
-        print('Você acertou!')
-        vida += 1
+print(10*'-')
+print('Adivinhe o numero sorteado de 1 a 20')
+tentativas = 6
+sorteio = randint(1, 20)
+while tentativas > 0:
+    print(10*'-')
+    print(f'tentativas restantes: {tentativas}')
+    sugestao = int(input('Sugestão do numero sorteado: '))
+    print(10*'-')
+    if sugestao == 0 or sugestao > 20:
+        print('O numero soteado está entre 1 e 20 tente novamente')
+        tentativas -= 1
+    elif sugestao < sorteio:
+        print(f'O numero sorteado é maior do que {sugestao}')
+        tentativas -= 1
+    elif sugestao > sorteio:
+        print(f'O numero sorteado é menor do que {sugestao}')
+        tentativas -= 1
     else:
-        print(f'Você errou o numero era: {sorteio}')
-        vida -= 1
-    if vida == 0:
         break
-    rodada += 1
-
-
-print(20*'-')
-print(f'Sobreviveu a {rodada} rodadas e morreu, tarde demais para tentar novamente...')
+if sugestao == sorteio:
+    print(f'Muito bem você acertou o numero sorteado em {7 - tentativas} tentativas')
+else:
+    print(f'O numero sorteado era {sorteio} Você perdeu!!!')
