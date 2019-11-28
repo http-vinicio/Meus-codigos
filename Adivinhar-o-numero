@@ -1,0 +1,34 @@
+from random import randint
+
+tentativas = 6
+
+sorteio = randint(1, 20)
+
+print('\nAdivinhe o numero sorteado de 1 a 20\n')
+
+while tentativas > 0:
+
+    sugestao = int(input('Sugestão: '))
+    
+    if sugestao == 0 or sugestao > 20:
+        print('\nO numero soteado está entre 1 e 20 tente novamente\n')
+        tentativas -= 1
+
+    elif sugestao < sorteio:
+        print(f'\nO numero sorteado é maior do que {sugestao}\n')
+        tentativas -= 1
+
+    elif sugestao > sorteio:
+        print(f'\nO numero sorteado é menor do que {sugestao}\n')
+        tentativas -= 1
+    
+    else:
+        break
+
+    print(f'\ntentativas restantes: {tentativas}\n')
+
+if sugestao == sorteio:
+    print(f'\nMuito bem você acertou o numero sorteado em {7 - tentativas} tentativas\n')
+
+else:
+    print(f'\nO numero sorteado era {sorteio} Você perdeu!!!\n')
