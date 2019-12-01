@@ -1,0 +1,55 @@
+sem_valor = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+#INTRODUÇÃO.
+print('\nSeja bem vindo ao jogo dos números\n\nVocê possui 9 números de (1 a 9)\nO objetivo é preencher todos os 9 espaços\nCom os números que lhe foi dado sem repeti-los\nVocê ganha o jogo quando cada linha vertical e horizontal somar (15)\nPara jogar digite a posição em seguida o numero que desejar.\n\nEx:\n    Posição: 5\n    Número: 8\n\nO resultado seria:\n 0 0 0\n 0 8 0\n 0 0 0')
+
+#INICIO.
+while True:
+    #OPÇÕES PARA INICIO DO GAME.
+    opção = int(input('\nVocê possui 3 opções no menu:\n (0) - Limpar todas as linhas\n (1) - Jogar o game\n (2) - Conferir a soma de cada linha\n (3) - Sair do programa\n\nDigite o que deseja fazer: '))
+
+    if opção == 0: #LIMPA O JOGO.
+        sem_valor = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        print('\nMuito bem, toda a tabela está limpa.\n')
+    
+    elif opção == 1: #INICIA O JOGO.
+        while True:
+            #CALCULO DAS LINHAS = 15.
+            lv1 = sem_valor[0] + sem_valor[3] + sem_valor[6]
+            lv2 = sem_valor[1] + sem_valor[4] + sem_valor[7]
+            lv3 = sem_valor[2] + sem_valor[5] + sem_valor[8]
+            lh1 = sem_valor[0] + sem_valor[1] + sem_valor[2]
+            lh2 = sem_valor[3] + sem_valor[4] + sem_valor[5]
+            lh3 = sem_valor[6] + sem_valor[7] + sem_valor[8]
+            #CONFERE SE O PLAYER GANHOU.
+            if lv1 == 15 and lv2 == 15 and lv3 == 15 and lh1 == 15 and lh2 == 15 and lh3 == 15:
+                print('Muito bem você ganhou o jogo')
+                exit()
+            #ALGUMAS INFO.
+            print('\nSe quiser voltar ao menu, no campo "Posição" digite: 0')
+
+            pos = int(input('\nPosição: ')) #PEDE A POSIÇÃO.
+
+            if pos == 0: #MANDA PARA O MENU.
+                break
+
+            numero = int(input('Numero: ')) #PEDE O NUMERO.
+            #ESTABELECE AS REGRAS PARA FINALIZAR A RODADA.
+            if pos < 0 or pos > 9 or numero <= 0 or numero > 9:
+                print('\nVocê digitou uma posição invalida ou um numero invalido, tente novamente')
+                
+            elif numero in sem_valor:
+                sem_valor.insert(sem_valor.index(numero), 0)
+                sem_valor.remove(numero)
+
+            sem_valor[pos - 1] = numero
+            print(f'\n{sem_valor[0]} {sem_valor[1]} {sem_valor[2]}\n{sem_valor[3]} {sem_valor[4]} {sem_valor[5]}\n{sem_valor[6]} {sem_valor[7]} {sem_valor[8]}')
+
+    elif opção == 2: #MOSTRA A SOMA DE CADA LINHA.
+        print(f'\nHorizontal:\n   Linha 1: {lh1}\n   Linha 2: {lh2}\n   Linha 3: {lh3}\n\nVertical:\n   Linha 1: {lv1}\n   Linha 2: {lv2}\n   Linha 3: {lv3}\n')
+
+    elif opção == 3: #EXIT.
+        print('\nMuito bem você saiu do programa e perdeu todo progresso\n')
+        exit()
+
+    else: #DIGITOU ERRADO, COMO VOCÊ É BURRO CARA QUE LOUCURA(MEME)
+        print('\nOpção invalida, tente novamente...')
