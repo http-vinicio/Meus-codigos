@@ -1,0 +1,54 @@
+from random import choice, randint
+from time import sleep
+#TIMES
+times = ['Flamengo', 'Palmeiras', 'Santos', 'São Paulo', 'Botafogo', 'Corinthias', 'Bahia', 'Vasco', 'Cruzeiro']
+#GOLS
+placar = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+for partidas in range(5):#O JOGO COMEÇA
+
+    times_selecionados = []
+
+    for sorteio in range(2): 
+        times_selecionados.append(choice(times))
+
+    while times_selecionados[0] == times_selecionados[1]:#NÃO SORTEAR O MESMO TIME
+        times_selecionados[1] = choice(times)
+
+    print(f'\n-=-=-=Partida iniciada=-=-=-\n\nTimes: {times_selecionados[0]} x {times_selecionados[1]}')
+    
+    gol1 = randint(0, 6)
+    gol2 = randint(0, 6)
+    
+    sleep(1)
+    print('...')
+    sleep(1)
+
+    if gol1 > gol2:#ATRIBUIÇÃO DE GOLS COM CORES
+        print('Placar: \033[32m'+f'{gol1}'+'\033[0;0m x \033[31m'+f'{gol2}'+'\033[0;0m\n')
+        placar[times.index(times_selecionados[0])] += gol1
+        sleep(1)
+        print(f'\033[32m'+f'{times_selecionados[0]}'+'\033[0;0m Venceu o jogo\n')
+
+    elif gol2 > gol1:
+        print('Placar: \033[31m'+f'{gol1}'+'\033[0;0m x \033[32m'+f'{gol2}'+'\033[0;0m\n')
+        placar[times.index(times_selecionados[1])] += gol2
+        sleep(1)
+        print(f'\033[32m'+f'{times_selecionados[1]}'+'\033[0;0m Venceu o jogo\n')
+
+    else:
+        print('Placar: \033[32m'+f'{gol1}'+'\033[0;0m x \033[32m'+f'{gol2}'+'\033[0;0m\n')
+        penaltis = randint(1, 3)
+        desempate = choice(times_selecionados)
+        placar[times.index(desempate)] += penaltis
+        sleep(1)
+        print(f'Houve um empate e após os pênaltis o time \033[32m'+f'{desempate}'+'\033[0;0m marcou \033[32m'+f'{penaltis}'+'\033[0;0m gol(s) resultando em sua vitoria\n')
+    
+    sleep(2)
+    print(f'-=-=-=Final da partida=-=-=-\n\n')
+    sleep(3)
+
+print('-=-=-=-=Placar Final=-=-=-=-\n')
+
+for i in (times):#MOSTRA O PLACAR DE TODOS OS TIMES
+    print(f'{i}: {placar[times.index(i)]}\n')
