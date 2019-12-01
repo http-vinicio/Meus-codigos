@@ -1,0 +1,73 @@
+from random import choice
+#BARALHO
+baralho = ['Vermelho 1', 'Vermelho 2', 'Vermelho 3', 'Vermelho 4', 'Vermelho 5', 'Vermelho 6', 'Vermelho 7', 'Vermelho 8', 'Vermelho 9', 
+'Amarelo 1', 'Amarelo 2', 'Amarelo 3', 'Amarelo 4', 'Amarelo 5', 'Amarelo 6', 'Amarelo 7', 'Amarelo 8', 'Amarelo 9', 
+'Azul 1', 'Azul 2', 'Azul 3', 'Azul 4', 'Azul 5', 'Azul 6', 'Azul 7', 'Azul 8', 'Azul 9', 
+'Verde 1', 'Verde 2', 'Verde 3', 'Verde 4', 'Verde 5', 'Verde 6', 'Verde 7', 'Verde 8', 'Verde 9']
+#JOGADORES
+jogador = []
+rival = []
+#ATRIBUI AS CARTAS DOS JOGADORES
+for i in range(6):
+    escolhidas_jogador = choice(baralho)
+    jogador.append(escolhidas_jogador)
+    baralho.remove(escolhidas_jogador)
+
+    escolhidas_rival = choice(baralho)
+    rival.append(escolhidas_rival)
+    baralho.remove(escolhidas_rival)
+#ATRIBUI CARTA DA MESA
+carta_central = choice(baralho)
+mesa = carta_central.split(' ')
+
+escolha_rival = ' '.join(rival)
+escolha_rival = escolha_rival.split(' ')
+
+print('\nBem vindo ao Uno\n\nPara jogar digite um numero correspondente a posição de suas cartas\n')
+
+while len(jogador) > 0:#INICIA O JOGO
+
+    count = 0
+
+    print('Seu baralho: \n')
+    print('(0) - Pega uma carta do baralho')
+
+    for m in jogador:
+        count += 1
+        print(f'({count}) - {m}')
+
+    print(f'\nMesa: {mesa[0]} {mesa[1]}')
+
+    jogada = int(input('\nDigite a posição corresponde a carta que queira jogar: '))
+
+    escolha_filtrada = jogador[jogada - 1].split(' ')
+        
+    if jogada == 0:
+        escolhidas_jogador = choice(baralho)
+        jogador.append(escolhidas_jogador)
+        baralho.remove(escolhidas_jogador)
+
+    elif escolha_filtrada[0] or escolha_filtrada[1] in mesa:
+        mesa = escolha_filtrada
+        del(jogador[jogada - 1])
+        print(f'\nJogada bem sucedida\n')
+    
+    else:
+        print('\nInfelizmente você jogou uma carta incompativel e perdeu a vez\n' )
+
+    for i in escolha_rival:
+        if i == mesa[0]:
+            mesa[1] = escolha_rival[escolha_rival.index(i) + 1]
+            del(escolha_rival[escolha_rival.index(i) + 1])
+            del(escolha_rival[escolha_rival.index(i)])
+            print(f'O rival jogou: {mesa[0]} {mesa[1]}\n')
+            break
+
+        elif i == mesa[1]:
+            mesa[0] = escolha_rival[escolha_rival.index(i) - 1]
+            del(escolha_rival[escolha_rival.index(i) - 1])
+            del(escolha_rival[escolha_rival.index(i)])
+            print(f'O rival jogou: {mesa[0]} {mesa[1]}\n')
+            break
+
+print('Parabéns você ganhou o jogo')
