@@ -1,0 +1,28 @@
+print('\nBem vindo a inscrição para a universidade de Pernambuco')
+
+nome = input('\nDigite seu nome: ')
+nome = nome.title()
+
+idade = int(input('\nDigite sua idade: '))
+
+if idade > 17:
+
+    print(f'\nDigite suas 4 notas abaixo {nome}')
+
+    notas = []
+    ordem = 1
+
+    for i in range(4):
+        notas.append(int(input(f'\n{ordem}ª Nota: ')))
+        ordem += 1
+    
+    media = sum(notas) / 4
+
+    if media >= 6:
+        print(f'\nParabéns {nome} você foi aprovado para nossa universidade com média {media}')
+    
+    else:
+        print(f'\nLamentamos {nome} você foi negado em nossa universidade por está abaixo da média 6')
+
+else:
+    print('Lamentamos mas você não possui a idade mínima de 18 anos')
