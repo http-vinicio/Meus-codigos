@@ -1,0 +1,51 @@
+from random import choice
+
+palavras = ['caridade', 'reciprocidade', 'teclado', 'vandalismo', 'fantastico', 'programador', 'dificuldade']
+
+forca = [':::::::::::::', ':::       :::', ':::       :::', ':::       ___', ':::      (º_º)', ':::     __) (__', ':::    |||   |||', ':::    |||=.=|||', ':::    m.| | |.m', ':::      | | |', ':::       d d', ':::', ':::', ':::::::::::::::::', '']
+
+senha = []
+
+palavra = choice(palavras)
+
+acertou = False
+loop = 0
+vida = 5 
+
+for i in palavra:
+    senha.append('-')
+
+print(f'\nA palavra possui {len(palavra)} caracteres')
+
+while acertou == False:
+
+    count = 0
+
+    print(f'\nPalavra: {" ".join(senha)}')
+
+    letra = input('\nDigite uma letra: ')
+
+    if letra in palavra:
+        for letral in palavra:
+            if letral == letra:
+                senha[count] = letra
+            count += 1
+
+    elif letra not in palavra:
+        vida -= 1
+        print(f'\nVocê errou!! A letra ({letra.upper()}) não está na palavra secreta\n\nVocê está sendo enforcado aos poucos {vida}/5\n')
+        countf = 0
+        loop += 3
+
+        for i in range(loop):
+            print(forca[countf])
+            countf += 1
+            
+        if loop == 15:
+            print(f'Infelizmente você foi enforcado, a palavra era: {palavra.title()}')
+            exit()
+
+    if '-' not in senha:
+            print(f'\nPalavra: {" ".join(senha)}')
+            print(f'\nParabéns você acertou a palavra: {palavra.title()}')
+            acertou = True
